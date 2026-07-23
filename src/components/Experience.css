@@ -1,0 +1,91 @@
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), rgba(99, 102, 241, 0.2));
+}
+
+.timeline__item {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.timeline__marker {
+  position: absolute;
+  left: 6px;
+  top: 1.6rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-soft);
+}
+
+.timeline__card {
+  padding: 1.6rem 1.75rem;
+}
+
+.timeline__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.timeline__period,
+.timeline__type {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+}
+
+.timeline__period {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.timeline__type {
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+}
+
+.timeline__card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.timeline__company {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.timeline__description {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 560px) {
+  .timeline::before {
+    left: 10px;
+  }
+
+  .timeline__item {
+    padding-left: 2.4rem;
+  }
+
+  .timeline__marker {
+    left: 2px;
+  }
+}
