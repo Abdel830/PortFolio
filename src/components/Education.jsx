@@ -14,15 +14,23 @@ export default function Education() {
         </div>
 
         <div className="education__grid">
-          {education.map((item) => (
-            <article key={item.title} className="education__card card reveal">
+          {education.map((item, i) => (
+            <article
+              key={item.title}
+              className="education__card card reveal"
+              data-delay={i * 150}
+            >
+              <div className="education__card-accent" />
               <span className="education__period">{item.period}</span>
               <h3>{item.title}</h3>
               <p className="education__school">{item.school}</p>
               {item.details.length > 0 && (
                 <ul>
                   {item.details.map((detail) => (
-                    <li key={detail}>{detail}</li>
+                    <li key={detail}>
+                      <span className="education__bullet">→</span>
+                      {detail}
+                    </li>
                   ))}
                 </ul>
               )}

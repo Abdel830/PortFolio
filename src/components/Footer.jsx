@@ -6,9 +6,10 @@ export default function Footer() {
 
   return (
     <footer className="footer">
+      <div className="footer__gradient-line" />
       <div className="container footer__inner">
         <p>
-          © {year} {profile.firstName} {profile.lastName}. Tous droits réservés.
+          &copy; {year} {profile.firstName} {profile.lastName}. Tous droits réservés.
         </p>
         <div className="footer__links">
           <a href={profile.github} target="_blank" rel="noreferrer">

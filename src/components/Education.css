@@ -6,6 +6,24 @@
 
 .education__card {
   padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.education__card-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.education__card:hover .education__card-accent {
+  transform: scaleX(1);
 }
 
 .education__period {
@@ -13,13 +31,22 @@
   font-family: var(--font-mono);
   font-size: 0.78rem;
   color: var(--accent);
-  margin-bottom: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  margin-bottom: 1rem;
 }
 
 .education__card h3 {
   font-size: 1.15rem;
   margin-bottom: 0.45rem;
   line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.education__card:hover h3 {
+  color: var(--accent);
 }
 
 .education__school {
@@ -30,17 +57,19 @@
 
 .education__card li {
   position: relative;
-  padding-left: 1rem;
+  padding-left: 0;
   color: var(--text-secondary);
   margin-bottom: 0.55rem;
   font-size: 0.95rem;
+  display: flex;
+  gap: 0.5rem;
+  line-height: 1.5;
 }
 
-.education__card li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
+.education__bullet {
   color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
 }
 
 @media (max-width: 760px) {

@@ -14,10 +14,19 @@ export default function Experience() {
         </div>
 
         <div className="timeline">
+          <div className="timeline__line" />
           {experiences.map((exp, index) => (
-            <article key={exp.company} className="timeline__item reveal" style={{ transitionDelay: `${index * 80}ms` }}>
-              <div className="timeline__marker" />
+            <article
+              key={exp.company}
+              className={`timeline__item reveal ${index % 2 === 0 ? 'timeline__item--left' : 'timeline__item--right'}`}
+              data-delay={index * 150}
+            >
+              <div className="timeline__marker">
+                <div className="timeline__marker-dot" />
+                <div className="timeline__marker-ring" />
+              </div>
               <div className="timeline__card card">
+                <div className="timeline__card-shine" />
                 <div className="timeline__meta">
                   <span className="timeline__period">{exp.period}</span>
                   <span className="timeline__type">{exp.type}</span>
@@ -25,6 +34,7 @@ export default function Experience() {
                 <h3>{exp.role}</h3>
                 <p className="timeline__company">{exp.company}</p>
                 <p className="timeline__description">{exp.description}</p>
+                <div className="timeline__card-accent" />
               </div>
             </article>
           ))}

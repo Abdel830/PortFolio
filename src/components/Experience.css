@@ -1,38 +1,96 @@
 .timeline {
   position: relative;
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
+  padding-left: 1rem;
 }
 
-.timeline::before {
-  content: '';
+.timeline__line {
   position: absolute;
-  left: 14px;
+  left: 16px;
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--accent), rgba(99, 102, 241, 0.2));
+  background: linear-gradient(180deg, var(--accent), #6366f1, #a855f7, transparent);
+  border-radius: 999px;
+}
+
+.timeline__line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -3px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 16px var(--accent);
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
 .timeline__item {
   position: relative;
-  padding-left: 3rem;
+  padding-left: 3.5rem;
 }
 
 .timeline__marker {
   position: absolute;
-  left: 6px;
-  top: 1.6rem;
-  width: 18px;
-  height: 18px;
+  left: 5px;
+  top: 1.8rem;
+  width: 24px;
+  height: 24px;
+}
+
+.timeline__marker-dot {
+  position: absolute;
+  inset: 4px;
   border-radius: 50%;
-  background: var(--bg-primary);
-  border: 3px solid var(--accent);
-  box-shadow: 0 0 0 6px var(--accent-soft);
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.5);
+}
+
+.timeline__marker-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 211, 238, 0.3);
+  animation: pulseGlow 2.5s ease-in-out infinite;
 }
 
 .timeline__card {
   padding: 1.6rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline__card-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+  transition: left 0.6s ease;
+}
+
+.timeline__card:hover .timeline__card-shine {
+  left: 120%;
+}
+
+.timeline__card-accent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline__card:hover .timeline__card-accent {
+  transform: scaleX(1);
 }
 
 .timeline__meta {
@@ -46,13 +104,15 @@
 .timeline__type {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  padding: 0.35rem 0.65rem;
+  padding: 0.35rem 0.7rem;
   border-radius: 999px;
+  transition: all 0.3s ease;
 }
 
 .timeline__period {
   color: var(--accent);
   background: var(--accent-soft);
+  border: 1px solid rgba(34, 211, 238, 0.15);
 }
 
 .timeline__type {
@@ -61,9 +121,19 @@
   border: 1px solid var(--border);
 }
 
+.timeline__card:hover .timeline__period {
+  background: rgba(34, 211, 238, 0.18);
+  box-shadow: 0 0 12px rgba(34, 211, 238, 0.15);
+}
+
 .timeline__card h3 {
   font-size: 1.2rem;
   margin-bottom: 0.35rem;
+  transition: color 0.3s ease;
+}
+
+.timeline__card:hover h3 {
+  color: var(--accent);
 }
 
 .timeline__company {
@@ -74,18 +144,19 @@
 
 .timeline__description {
   color: var(--text-secondary);
+  line-height: 1.65;
 }
 
 @media (max-width: 560px) {
-  .timeline::before {
-    left: 10px;
+  .timeline__line {
+    left: 12px;
   }
 
   .timeline__item {
-    padding-left: 2.4rem;
+    padding-left: 2.8rem;
   }
 
   .timeline__marker {
-    left: 2px;
+    left: 1px;
   }
 }

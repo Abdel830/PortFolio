@@ -14,14 +14,39 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.12), transparent 28%),
-    radial-gradient(circle at 85% 10%, rgba(99, 102, 241, 0.14), transparent 24%),
-    radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.1), transparent 30%);
+    radial-gradient(circle at 15% 20%, rgba(34, 211, 238, 0.15), transparent 28%),
+    radial-gradient(circle at 85% 10%, rgba(99, 102, 241, 0.18), transparent 24%),
+    radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.12), transparent 30%);
   pointer-events: none;
 }
 
 .intro--exit {
   animation: introCurtainUp 0.9s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.intro__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.intro__particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  animation: introParticle 3s ease-in-out infinite;
+}
+
+@keyframes introParticle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1) translateY(-30px);
+  }
 }
 
 .intro__content {
@@ -39,6 +64,35 @@
 
 .intro__content--out {
   animation: introNameOut 0.6s ease forwards;
+}
+
+.intro__line {
+  width: 60px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--gradient);
+  border-radius: 999px;
+}
+
+.intro__line--top {
+  margin-bottom: 1.5rem;
+  animation: lineExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.intro__line--bottom {
+  margin-top: 1.5rem;
+  animation: lineExpand 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+@keyframes lineExpand {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 60px;
+    opacity: 1;
+  }
 }
 
 .intro__name {
@@ -63,24 +117,24 @@
 @keyframes introNameIn {
   from {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(28px) scale(0.95);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
 @keyframes introNameOut {
   from {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   to {
     opacity: 0.18;
-    transform: translateY(-8px) scale(0.98);
+    transform: translateY(-12px) scale(0.96);
   }
 }
 
@@ -100,7 +154,9 @@ body.intro-active {
 
 @media (prefers-reduced-motion: reduce) {
   .intro,
-  .intro__content {
+  .intro__content,
+  .intro__particle,
+  .intro__line {
     animation: none !important;
   }
 }
