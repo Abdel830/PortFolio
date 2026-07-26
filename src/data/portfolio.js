@@ -8,7 +8,7 @@ export const profile = {
   github: 'https://github.com/Abdel830',
   linkedin: 'https://www.linkedin.com/in/abdelali-ouamassi-55ba67362',
   cvUrl: '/assets/CV.pdf',
-  imageUrl: '/assets/photoPro.png',
+  imageUrl: '/assets/photoPro.jpeg',
   bio: `Je suis une personne motivée, sérieuse et passionnée par le domaine de l'informatique et du développement web. J'aime relever des défis qui me permettent d'améliorer mes compétences, je travaille aussi bien en équipe qu'en autonomie. Mon objectif est de mettre en pratique mes compétences en développement web, d'apprendre continuellement et de contribuer efficacement aux projets auxquels je participe.`,
 }
 
