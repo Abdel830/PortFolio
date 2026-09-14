@@ -35,6 +35,15 @@ export const experiences = [
   {
     period: '2026',
     role: 'Développeur Full-Stack Web',
+    company: 'AI Career Assistant',
+    type: 'Projet Personnel',
+    description:
+      "Plateforme Web Full-Stack propulsée par Google Gemini : analyse de CV & match offre, générateur de lettres de motivation, simulateur d'entretien IA interactif (8 questions, feedback et bilan de performance) et tableau de bord de suivi. Stack : React 19, Vite, Tailwind CSS, Node.js, Express.js, API Google Gemini, MySQL (Aiven), déploiement Vercel.",
+    url: 'https://career-assistant-one.vercel.app/',
+  },
+  {
+    period: '2026',
+    role: 'Développeur Full-Stack Web',
     company: 'Centre Régional des Formations et des Rencontres Oujda (CRFR)',
     type: 'Stage de Fin d\'Études',
     description:
@@ -47,15 +56,6 @@ export const experiences = [
     type: 'Projet Personnel',
     description:
       "Conception et développement d'une plateforme de services connectant des clients (besoin d'un service) avec des prestataires (propose le service).",
-  },
-  {
-    period: '2025',
-    role: 'Développeur Full-Stack Web',
-    company: 'AI Career Assistant',
-    type: 'Projet Personnel',
-    description:
-      "Plateforme Web Full-Stack propulsée par Google Gemini : analyse de CV & match offre, générateur de lettres de motivation, simulateur d'entretien IA interactif (8 questions, feedback et bilan de performance) et tableau de bord de suivi. Stack : React 19, Vite, Tailwind CSS, Node.js, Express.js, API Google Gemini, MySQL (Aiven), déploiement Vercel.",
-    url: 'https://career-assistant-one.vercel.app/',
   },
   {
     period: '2025',
