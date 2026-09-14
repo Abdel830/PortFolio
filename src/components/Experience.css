@@ -147,6 +147,28 @@
   line-height: 1.65;
 }
 
+.timeline__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 999px;
+  background: rgba(34, 211, 238, 0.06);
+  transition: all 0.3s ease;
+}
+
+.timeline__link:hover {
+  background: rgba(34, 211, 238, 0.15);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.2);
+  border-color: rgba(34, 211, 238, 0.45);
+}
+
 @media (max-width: 560px) {
   .timeline__line {
     left: 12px;

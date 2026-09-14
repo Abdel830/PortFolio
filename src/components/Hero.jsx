@@ -141,7 +141,7 @@ export default function Hero() {
                   <polyline points="8,6 2,12 8,18" />
                 </svg>
               </div>
-              <strong>3+</strong>
+              <strong>4+</strong>
               <span>Projets réalisés</span>
             </div>
             <div className="hero__stat card reveal" data-delay="200">

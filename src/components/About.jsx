@@ -38,7 +38,7 @@ function useCounter(end, duration = 2000) {
 
 export default function About() {
   const years = useCounter(2, 1500)
-  const projects = useCounter(3, 1500)
+  const projects = useCounter(4, 1500)
 
   const highlights = [
     { label: 'Spécialité', value: 'Développement Web Full-Stack', icon: '⚡' },

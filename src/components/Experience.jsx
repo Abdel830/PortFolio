@@ -34,6 +34,11 @@ export default function Experience() {
                 <h3>{exp.role}</h3>
                 <p className="timeline__company">{exp.company}</p>
                 <p className="timeline__description">{exp.description}</p>
+                {exp.url && (
+                  <a href={exp.url} target="_blank" rel="noopener noreferrer" className="timeline__link">
+                    Voir le projet
+                  </a>
+                )}
                 <div className="timeline__card-accent" />
               </div>
             </article>
