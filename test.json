@@ -1,0 +1,142 @@
+{
+  "name": "Nettoyage Google Sheets - Filtre Email & LinkedIn",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "d1a1b1c1-1111-4111-8111-111111111111",
+      "name": "Déclencheur Manuel",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [100, 300]
+    },
+    {
+      "parameters": {
+        "documentId": { "__rl": true, "value": "1CsdyrZr_wwSVnltJpOXMPHOkJ4HvGKmtVQ4y6kKMSiQ", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Feuille 1", "mode": "name" },
+        "options": {}
+      },
+      "id": "d2a2b2c2-2222-4222-8222-222222222222",
+      "name": "1. Lire toutes les entreprises",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [320, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Récupérer toutes les lignes du Google Sheet\nconst items = $input.all();\nconst lignesPropres = [];\nlet lignesSupprimees = 0;\n\n// Fonction pour vérifier si une cellule est vide ou contient \"Non trouvé\"\nfunction estInvalide(valeur) {\n  if (!valeur) return true; // null, undefined, ou chaîne vide \"\"\n  const texte = String(valeur).trim().toLowerCase();\n  return texte === '' || \n         texte === 'non trouvé' || \n         texte === 'non trouvée' || \n         texte === 'n/a' || \n         texte === '-';\n}\n\nfor (const item of items) {\n  const ligne = item.json;\n  const email = ligne['Email'];\n  const linkedin = ligne['LinkedIn'];\n\n  const aEmailValide = !estInvalide(email);\n  const aLinkedInValide = !estInvalide(linkedin);\n\n  // Condition : On garde SI ET SEULEMENT SI il y a un Email OU un LinkedIn\n  if (aEmailValide || aLinkedInValide) {\n    // Bonus Propreté : On remplace \"Non trouvé\" par une vraie cellule vide\n    if (!aEmailValide) ligne['Email'] = '';\n    if (!aLinkedInValide) ligne['LinkedIn'] = '';\n    \n    // On supprime les métadonnées internes de lecture n8n avant réécriture\n    delete ligne['row_number'];\n    delete ligne['rowNumber'];\n    \n    lignesPropres.push({ json: ligne });\n  } else {\n    lignesSupprimees++;\n  }\n}\n\nconsole.log(`Nettoyage terminé : ${lignesPropres.length} conservées, ${lignesSupprimees} supprimées.`);\nreturn lignesPropres;"
+      },
+      "id": "d3a3b3c3-3333-4333-8333-333333333333",
+      "name": "2. Filtrer (Garder Email OU LinkedIn)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [540, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $input.all().length > 0 }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "d4a4b4c4-4444-4444-8444-444444444444",
+      "name": "3. Sécurité (Données > 0 ?)",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [760, 300]
+    },
+    {
+      "parameters": {
+        "operation": "clear",
+        "documentId": { "__rl": true, "value": "VOTRE_ID_GOOGLE_SHEET1CsdyrZr_wwSVnltJpOXMPHOkJ4HvGKmtVQ4y6kKMSiQ", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Feuille 1", "mode": "name" },
+        "options": {
+          "range": "A2:Z10000"
+        }
+      },
+      "id": "d5a5b5c5-5555-4555-8555-555555555555",
+      "name": "4. Vider l'ancien tableau (A2:Z10000)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [980, 280]
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": { "__rl": true, "value": "1CsdyrZr_wwSVnltJpOXMPHOkJ4HvGKmtVQ4y6kKMSiQ", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "Feuille 1", "mode": "name" },
+        "options": {},
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {}
+        }
+      },
+      "id": "d6a6b6c6-6666-4666-8666-666666666666",
+      "name": "5. Réécrire la liste propre",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1200, 280]
+    }
+  ],
+  "connections": {
+    "Déclencheur Manuel": {
+      "main": [
+        [
+          {
+            "node": "1. Lire toutes les entreprises",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "1. Lire toutes les entreprises": {
+      "main": [
+        [
+          {
+            "node": "2. Filtrer (Garder Email OU LinkedIn)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "2. Filtrer (Garder Email OU LinkedIn)": {
+      "main": [
+        [
+          {
+            "node": "3. Sécurité (Données > 0 ?)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "3. Sécurité (Données > 0 ?)": {
+      "main": [
+        [
+          {
+            "node": "4. Vider l'ancien tableau (A2:Z10000)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "4. Vider l'ancien tableau (A2:Z10000)": {
+      "main": [
+        [
+          {
+            "node": "5. Réécrire la liste propre",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
